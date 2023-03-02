@@ -1,0 +1,261 @@
+*,
+*::after,
+*::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Manrope', sans-serif;
+	height: 100dvh;
+	display: grid;
+	place-content: center;
+	background-color: var(--light-grayish-blue);
+
+	--very-dark-grayish-blue: hsl(217, 19%, 35%);
+	--desaturated-dark-blue: hsl(214, 17%, 51%);
+	--grayish-blue: hsl(212, 23%, 69%);
+	--light-grayish-blue: hsl(210, 46%, 95%);
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+.card-wrapper {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 300px;
+	border-radius: 10px;
+	gap: 10px;
+	background-color: white;
+	overflow-y: hidden;
+}
+
+.post-picture {
+	height: 180px;
+	object-fit: cover;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.card-content {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	padding: 10px 30px;
+}
+
+.card-content h1 {
+	font-size: 0.9rem;
+	color: var(--very-dark-grayish-blue);
+	margin-block: 10px;
+}
+
+.card-content p {
+	font-size: 0.82rem;
+	color: var(--desaturated-dark-blue);
+}
+
+.card-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.profile-picture {
+	width: 40px;
+	height: 40px;
+	border-radius: 100px;
+}
+
+.name-and-date {
+	transform: translateX(-15px);
+}
+
+.card-footer h2,
+.card-footer span {
+	font-size: 0.82rem;
+}
+
+.card-footer h2 {
+	color: var(--very-dark-grayish-blue);
+}
+
+.card-footer span {
+	color: var(--desaturated-dark-blue);
+}
+
+.share-button-mobile,
+.share-button-desktop {
+	background-color: var(--light-grayish-blue);
+	display: grid;
+	cursor: pointer;
+	place-content: center;
+	border: none;
+	width: 25px;
+	height: 25px;
+	padding: 15px;
+	border-radius: 100px;
+}
+
+.share-links-container-desktop {
+	display: none;
+}
+
+.share-button-mobile.active {
+	background-color: var(--desaturated-dark-blue);
+}
+
+.share-links-wrapper {
+	transition: transform 500ms ease-out;
+	transform: translateY(100%);
+	padding-inline: 30px;
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	height: 60px;
+	background-color: var(--very-dark-grayish-blue);
+	align-items: center;
+	justify-content: space-between;
+	display: flex;
+}
+
+.share-links-content {
+	display: flex;
+	gap: 15px;
+	align-items: baseline;
+}
+
+.share-links-content svg {
+	cursor: pointer;
+}
+
+.share-links-content span {
+	color: var(--grayish-blue);
+	text-transform: uppercase;
+	letter-spacing: 5px;
+	font-size: 0.7rem;
+	align-self: center;
+}
+
+.share-links-wrapper-desktop {
+	display: none;
+}
+
+@media (min-width: 1440px) {
+	.card-wrapper {
+		flex-direction: row;
+		align-items: center;
+		width: 700px;
+		height: 250px;
+		overflow-y: initial;
+	}
+
+	.card-content {
+		padding: 0 20px;
+		gap: 15px;
+	}
+
+	.card-content h1 {
+		font-size: 1.1rem;
+		max-width: 26ch;
+	}
+
+	.card-content p {
+		max-width: 45ch;
+	}
+
+	.post-picture {
+		height: 100%;
+		width: 38%;
+		object-fit: cover;
+		object-position: top left;
+		border-top-left-radius: 10px;
+		border-bottom-left-radius: 10px;
+		border-top-right-radius: initial;
+	}
+
+	.name-and-date {
+		transform: translateX(-80px);
+	}
+
+	.share-button-mobile {
+		display: none;
+	}
+
+	.share-links-wrapper {
+		display: none;
+	}
+
+	.share-links-container-desktop {
+		display: flex;
+		position: relative;
+		z-index: 1;
+	}
+
+	@keyframes tooltip-show {
+		0% {
+			opacity: 0;
+			transform: translate(0, 50%);
+		}
+		100% {
+			opacity: 1;
+			transform: translate(0, 0);
+		}
+	}
+
+	@keyframes tooltip-hide {
+		0% {
+			opacity: 1;
+			transform: translate(0, 0);
+		}
+		100% {
+			opacity: 0;
+			display: none;
+			transform: translate(0, 50%);
+		}
+	}
+
+	.share-links-wrapper-desktop {
+		box-shadow: 0px 5px 10px hsla(0deg, 0%, 0%, 0.2);
+		top: -240%;
+		left: -322%;
+		padding-inline: 30px;
+		border-radius: 10px;
+		position: absolute;
+		height: 50px;
+		background-color: var(--very-dark-grayish-blue);
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.share-links-wrapper-desktop::after {
+		content: '';
+		position: absolute;
+		bottom: -19px;
+		left: 50%;
+		border: 10px solid transparent;
+		border-top-color: var(--very-dark-grayish-blue);
+		transform: translateX(-50%);
+	}
+
+	.share-links-wrapper-desktop.show {
+		opacity: 1;
+		display: flex;
+		animation: tooltip-show 0.3s ease-in-out;
+	}
+
+	.share-links-wrapper-desktop.hide {
+		animation: tooltip-hide 0.3s ease-in-out forwards;
+	}
+
+	.share-button-desktop.active {
+		display: none;
+		position: absolute;
+		background-color: var(--desaturated-dark-blue);
+	}
+}
